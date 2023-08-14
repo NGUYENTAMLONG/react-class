@@ -1,0 +1,16 @@
+table {
+  tbody {
+    tr {
+      .edit-btn {
+        &:hover {
+          color: rgb(6, 194, 131);
+        }
+      }
+      .delete-btn {
+        &:hover {
+          color: rgba(255, 0, 0, 0.801);
+        }
+      }
+    }
+  }
+}

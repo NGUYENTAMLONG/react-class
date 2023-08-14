@@ -1,0 +1,11 @@
+.jobs-box {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  .job {
+    .job__name {
+      margin: 10px;
+    }
+  }
+}
