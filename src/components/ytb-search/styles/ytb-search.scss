@@ -1,0 +1,27 @@
+.ytb-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  input {
+    outline: none;
+    margin-right: 10px;
+    min-width: 600px;
+  }
+  button {
+  }
+}
+.ytb-result {
+  .ytb-video {
+    display: flex;
+    .left {
+      .frame-ytb {
+        width: 100%;
+        height: 270px;
+        background-color: red($color: #000000);
+        border: 2px black solid;
+      }
+    }
+    .right {
+    }
+  }
+}

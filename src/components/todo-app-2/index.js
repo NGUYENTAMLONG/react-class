@@ -6,12 +6,14 @@ class MyToDoApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: [...JSON.parse(localStorage.getItem("list"))],
+      list: localStorage.getItem("list")
+        ? [...JSON.parse(localStorage.getItem("list"))]
+        : [],
     };
   }
-
+  // ...JSON.parse(localStorage.getItem("list"))
   componentDidMount() {
-    if (JSON.parse(localStorage.getItem("list")).length === 0) {
+    if (!JSON.parse(localStorage.getItem("list"))) {
       localStorage.setItem(
         "list",
         JSON.stringify([
@@ -25,6 +27,9 @@ class MyToDoApp extends React.Component {
           },
         ])
       );
+      this.setState({
+        list: [...JSON.parse(localStorage.getItem("list"))],
+      });
     }
   }
 

@@ -1,0 +1,75 @@
+.login-container {
+  background-color: #ffff;
+  width: 100%;
+  padding: 30px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  .login-form {
+    margin: 0 auto;
+    width: 50%;
+    color: rgba(0, 0, 0, 0.829);
+    &__header {
+      font-weight: bold;
+    }
+    &__label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      label {
+        font-weight: bold;
+        font-size: 17px;
+      }
+      span {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+    &__inputs {
+      &__item {
+        background-color: rgba(220, 220, 220, 0.37);
+        width: 100%;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        font-size: 15px;
+        padding: 10px;
+        &:focus {
+          color: #fe2c55;
+        }
+      }
+    }
+    #password-input {
+      position: relative;
+      .login-form__inputs__item {
+        margin-top: 7px;
+      }
+      i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-40%);
+        right: 15px;
+        color: grey;
+        cursor: pointer;
+      }
+    }
+  }
+}
+/* ENDLESS ROTATE */
+.rotate {
+  animation: rotate 1.5s linear infinite;
+}
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* SPINNER JUST FOR DEMO */
+.spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: inset -2px 0 0 2px #0bf;
+}

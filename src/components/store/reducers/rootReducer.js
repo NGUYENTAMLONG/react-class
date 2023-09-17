@@ -26,21 +26,18 @@ const rootReducer = (state = initialState, action) => {
       console.log(action);
       const generateId = Math.floor(Math.random() * 100);
       const newJob = { id: generateId, name: action.payload.job.name };
-      initialState.jobs.push(newJob);
-      return { ...state, jobs: [...state.jobs] };
+      return { ...state, jobs: [...state.jobs, newJob] };
     case "DELETE_JOB":
       console.log(" delete action ", action);
-      initialState.jobs = [
-        ...initialState.jobs.filter((job) => job.id !== action.payload),
-      ];
-      return { ...state, jobs: initialState.jobs };
+      state.jobs = [...state.jobs.filter((job) => job.id !== action.payload)];
+      return { ...state, jobs: state.jobs };
     case "UPDATE_JOB":
-      const index = initialState.jobs.findIndex((job) => {
+      const index = state.jobs.findIndex((job) => {
         return job.id === action.payload.id;
       });
       console.log(index);
 
-      initialState.jobs[index].name = action.payload.name;
+      state.jobs[index].name = action.payload.name;
 
       return { ...state, jobs: [...initialState.jobs] };
     default:

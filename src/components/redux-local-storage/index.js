@@ -1,12 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
 import "./styles/index.scss";
-class TodolistRedux extends React.Component {
+import { connect } from "react-redux";
+class TodolistReduxLocalStorage extends React.Component {
   state = {
     jobInput: "",
     jobEdit: false,
-    jobIdEdit: "",
     jobEditName: "",
+    jobIdEdit: "",
   };
   handleOnChange = (event) => {
     this.setState({
@@ -15,54 +15,27 @@ class TodolistRedux extends React.Component {
   };
   handleOnSubmit = (event) => {
     event.preventDefault();
+    this.props.createJob(this.state.jobInput);
     this.setState({
       jobInput: "",
     });
-    this.props.addJob({ job: { name: this.state.jobInput } });
-  };
-  handleDelete = (event, jobId) => {
-    event.preventDefault();
-    this.props.deleteJob(jobId);
-  };
-  handleToggleEdit = (event, job, cancel) => {
-    event.preventDefault();
-    this.setState({
-      jobEdit: true,
-      jobIdEdit: job.id,
-      jobEditName: job.name,
-    });
-    if (cancel) {
-      this.setState({
-        jobEdit: false,
-        jobIdEdit: "",
-        jobEditName: "",
-      });
-    }
   };
   handleOnEditChange = (event) => {
     this.setState({
-      jobEditName: event.target.value,
+      jobEditName: event.target.event,
     });
   };
-  handleOnSubmitEdit = (event) => {
+  handleDelete = (event, jobId) => {
     event.preventDefault();
-    const payload = {
-      id: this.state.jobIdEdit,
-      name: this.state.jobEditName,
-    };
-    this.props.submitEditJob(payload);
-    this.setState({
-      jobInput: "",
-      jobEdit: false,
-      jobIdEdit: "",
-      jobEditName: "",
-    }); //// Chưa tự re-render ************** ---> li do la chinh sua ca initialState trong file rootReducer.js
+    this.props.removeJob(jobId);
   };
   render() {
-    const jobs = this.props.data.jobs;
+    const { jobs, user } = this.props;
+
+    console.log(this.props);
     return (
       <>
-        <h2>TODOLIST WITH REDUX</h2>
+        <h2>TODOLIST WITH REDUX (data localStorage)</h2>
         <form>
           <input
             type="text"
@@ -96,7 +69,7 @@ class TodolistRedux extends React.Component {
                   <button onClick={(event) => this.handleDelete(event, job.id)}>
                     X
                   </button>
-                  {this.state.jobEdit && this.state.jobIdEdit === job.id ? (
+                  {/* {this.state.jobEdit && this.state.jobIdEdit === job.id ? (
                     <>
                       <button
                         onClick={(event) => this.handleOnSubmitEdit(event)}
@@ -119,7 +92,7 @@ class TodolistRedux extends React.Component {
                     >
                       EDIT
                     </button>
-                  )}
+                  )} */}
                 </div>
               );
             })}
@@ -131,14 +104,18 @@ class TodolistRedux extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    data: state.jobs,
+    data: state,
+    jobs: state.data.jobs,
+    user: state.data.user,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    addJob: (job) => dispatch({ type: "ADD_JOB", payload: job }),
-    deleteJob: (jobId) => dispatch({ type: "DELETE_JOB", payload: jobId }),
-    submitEditJob: (job) => dispatch({ type: "UPDATE_JOB", payload: job }),
+    createJob: (job) => dispatch({ type: "ADD_JOB", payload: job }),
+    removeJob: (jobId) => dispatch({ type: "REMOVE_JOB", payload: jobId }),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(TodolistRedux);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodolistReduxLocalStorage);

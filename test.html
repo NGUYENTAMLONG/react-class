@@ -11,29 +11,42 @@
 
 </body>
 <script>
-  const fetchData = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const data = "Data from the server";
-        // Simulate success
-        resolve(data);
+  let a = 1;
+  a = 3
+  const abc = () => {
+    myFunc()
+  }
+  
+  function myFunc() {
+    console.log(a);
+  }
 
-        // Simulate error
-        reject("Error fetching data");
-      }, 1000);
-    });
-  };
+  console.log(b);
+  var b = 2;
+  console.log(Math.max(), Math.min());
+  // const fetchData = () => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       const data = "Data from the server";
+  //       // Simulate success
+  //       resolve(data);
 
-  const handleData = async () => {
-    try {
-      const result = await fetchData();
-      console.log("Success:", result);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  //       // Simulate error
+  //       reject("Error fetching data");
+  //     }, 1000);
+  //   });
+  // };
 
-  handleData();
+  // const handleData = async () => {
+  //   try {
+  //     const result = await fetchData();
+  //     console.log("Success:", result);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
+
+  // handleData();
 </script>
 
 </html>
